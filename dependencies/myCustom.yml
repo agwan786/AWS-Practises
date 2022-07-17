@@ -1,0 +1,5 @@
+tableName: 'users-${sls:stage}'
+mySnsTopic: "${self:service}-${sls:stage}-sns-consume"
+mySnsTopicArn:
+  { "Fn::Join" : ["", ["arn:aws:sns:${self:provider.region}:", { "Ref" : "AWS::AccountId" }, ":${self:custom.mySnsTopic}" ] ]  }
+mySQSQueue: "MyQueue"

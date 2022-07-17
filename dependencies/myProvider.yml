@@ -1,0 +1,5 @@
+name: aws
+runtime: nodejs14.x
+region: ap-south-1
+iam: ${file(./dependencies/myIam.yml)}
+environment: ${file(./dependencies/myEnv.yml)}

@@ -1,14 +1,17 @@
-service: aws-node-express-dynamodb-api-project
+service: marketplace
 frameworkVersion: '3'
+configValidationMode: error
+deprecationNotificationMode: warn:summary
 
-custom: ${file(./dependencies/myCustomFile.yml)}
+constructs:
+  jobs:
+    type: queue
+    worker:
+      handler: functions/sqs/handler.consumer
 
-provider:
-  name: aws
-  runtime: nodejs14.x
-  region: ap-south-1
-  iam: ${file(./dependencies/myIam.yml)}
-  environment: ${file(./dependencies/myEnv.yml)}
+custom: ${file(./dependencies/myCustom.yml)}
+
+provider: ${file(./dependencies/myProvider.yml)}
 
 functions: ${file(./dependencies/myFunction.yml)}
 

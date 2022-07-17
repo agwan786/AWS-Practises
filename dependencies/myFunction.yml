@@ -1,15 +1,29 @@
 api:
-  handler: functions/handler.handler
+  handler: functions/lambda/handler.handler
   events:
     - httpApi: '*'
 snsConsume:
-  handler: functions/snsConsume.handler
+  handler: functions/sns/snsConsume.handler
   events:
     - sns: ${self:custom.mySnsTopic}
 snsPublish:
-  handler: functions/snsPublish.handler
+  handler: functions/sns/snsPublish.handler
   events:
     - http:
         path: snsPublish
         method: post
         cors: false
+sqsSender:
+  handler: functions/sqs/handler.producer
+  events:
+    - httpApi:
+        method: post
+        path: /produce
+#sqsReceiver:
+#  handler: functions/sqs/receiver.handler
+#  events:
+#    - sqs:
+#        arn:
+#          Fn::GetAtt:
+#            - MyQueue
+#            - Arn

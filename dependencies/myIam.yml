@@ -8,7 +8,12 @@ role:
         - dynamodb:PutItem
         - dynamodb:UpdateItem
         - dynamodb:DeleteItem
-        - SNS:*
+        - SNS:Publish
+        - SQS:SendMessage
+        - SQS:GetQueueUrl
+        - SQS:ListQueues
       Resource:
         - Fn::GetAtt: [ UsersTable, Arn ]
         - Fn::Join: ["", [ "arn:aws:sns:${self:provider.region}:", { "Ref" : "AWS::AccountId" }, ":${self:custom.mySnsTopic}" ]]
+        - Fn::Join: ["", [ "arn:aws:sqs:${self:provider.region}:", { "Ref" : "AWS::AccountId" }, ":MyQueue" ]]
+        - Fn::Join: ["", [ "arn:aws:sqs:${self:provider.region}:", { "Ref" : "AWS::AccountId" }, ":*" ]]
