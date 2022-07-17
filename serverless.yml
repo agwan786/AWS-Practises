@@ -1,0 +1,15 @@
+service: aws-node-express-dynamodb-api-project
+frameworkVersion: '3'
+
+custom: ${file(./dependencies/myCustomFile.yml)}
+
+provider:
+  name: aws
+  runtime: nodejs14.x
+  region: ap-south-1
+  iam: ${file(./dependencies/myIam.yml)}
+  environment: ${file(./dependencies/myEnv.yml)}
+
+functions: ${file(./dependencies/myFunction.yml)}
+
+resources: ${file(./dependencies/myResource.yml)}

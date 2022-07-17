@@ -1,0 +1,15 @@
+api:
+  handler: functions/handler.handler
+  events:
+    - httpApi: '*'
+snsConsume:
+  handler: functions/snsConsume.handler
+  events:
+    - sns: ${self:custom.mySnsTopic}
+snsPublish:
+  handler: functions/snsPublish.handler
+  events:
+    - http:
+        path: snsPublish
+        method: post
+        cors: false

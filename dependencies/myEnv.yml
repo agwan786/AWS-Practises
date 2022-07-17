@@ -1,0 +1,2 @@
+USERS_TABLE: ${self:custom.tableName}
+mySnsTopicArn: ${self:custom.mySnsTopicArn}
